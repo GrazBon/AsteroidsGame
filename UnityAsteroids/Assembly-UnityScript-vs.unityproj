@@ -49,6 +49,8 @@
      <Compile Include="Assets\BorderController.js" />
      <Compile Include="Assets\LaserController.js" />
      <Compile Include="Assets\PlayerController.js" />
+     <Compile Include="Assets\PowerUpController.js" />
+     <Compile Include="Assets\PowerUpGenerator.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

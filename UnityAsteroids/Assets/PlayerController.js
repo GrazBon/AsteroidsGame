@@ -9,6 +9,20 @@ var startTime:float=0.0;
 var currentTime:float=0.0;
 var elapsedTime:int=0;
 
+static var score:int=0;
+static var health:int=100;
+//game is not over yet
+var gameover:boolean=false;
+
+function OnTriggerEnter(other:Collider)
+{
+	if(other.gameObject.tag=="asteroid")
+	{
+		//reduce 1% health
+		health-=1;
+	}
+}
+
 function Start () {
 	//The time the player stated playing
 	startTime = Time.time;
@@ -18,12 +32,17 @@ function Start () {
 function Update () 
 {
 	currentTime = Time.time;
-	//il- hin li ghadda nahdmuh hekk
-	elapsedTime = currentTime - startTime;
+	
+	if(health <= 0)
+	{
+		gameover=true;
+	}
 	
 	//kill the game after 60s
-	if(elapsedTime < 60)
+	if(elapsedTime < 10)
 	{
+		//il- hin li ghadda nahdmuh hekk
+		elapsedTime = currentTime - startTime;
 		//enable borders using the borders function in BorderController
 		BorderController.EnableBorders(transform);
 	
@@ -48,6 +67,8 @@ function Update ()
 		}
 		
 	}else{
+		//the game has finished
+		gameover=true;
 		//game over
 		print("game over");
 	}
@@ -56,6 +77,14 @@ function Update ()
 
 function OnGUI()
 {
+	GUI.color = Color.blue;
 	//to show the timer
 	GUI.Label(Rect(0,0,150,50),"Elapsed Time: "+elapsedTime);
+	GUI.Label(Rect(0,20,150,50),"Score: "+score);
+	GUI.Label(Rect(0,40,150,50),"Health: "+health);
+
+	if (gameover == true)
+	{
+		GUI.Label(Rect(0,60,200,100),"GAME OVER");
+	}
 }
